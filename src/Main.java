@@ -1,10 +1,10 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> product = new ArrayList<>();
+        List<String> product = new ArrayList<>();
         int addProducts = 0;
 
         while (true) {
@@ -36,27 +36,25 @@ public class Main {
                         System.out.println((i + 1) + " " + product.get(i));
                     }
                     System.out.println("Какую хотите удалить? Введите номер или название");
-                    String delProduct = scanner.next();
+                    String removeProduct = scanner.next();
                     try {
-                        int delProductByNumber = Integer.parseInt(delProduct);
-                        for (int j = 0; j < product.size(); j++) {
-                            if (delProductByNumber == j + 1) {
-                                String temp = product.remove(j);
-                                System.out.println("Продукт " + temp + " удален. Список покупок:");
-                            }
+                        int numberOfRemovingProduct = Integer.parseInt(removeProduct);
+
+                        System.out.println("Продукт " + product.get(numberOfRemovingProduct - 1) + " удалён. ");
+                        product.remove(numberOfRemovingProduct - 1);
+                        System.out.println("Список покупок: ");
+                        for (int i = 0; i < product.size(); i++) {
+                            System.out.println(i + 1 + "." + product.get(i));
                         }
-                        addProducts--;
                     } catch (NumberFormatException e) {
-                        for (int j = 0; j < product.size(); j++) {
-                            if (delProduct.equals(product.get(j))) {
-                                product.remove(product.get(j));
-                                System.out.println("Продукт " + delProduct + " удален. Список покупок:");
+                        if (product.contains(removeProduct)) {
+                            product.remove(removeProduct);
+                            System.out.println("Продукт " + removeProduct + " удалён.");
+                            System.out.println("Список покупок: ");
+                            for (int i = 0; i < product.size(); i++) {
+                                System.out.println(i + 1 + "." + product.get(i));
                             }
                         }
-                        addProducts--;
-                    }
-                    for (int i = 0; i < product.size(); i++) {
-                        System.out.println((i + 1) + " " + product.get(i));
                     }
                     break;
                 case "4":
